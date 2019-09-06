@@ -3,11 +3,9 @@ import React, { Component } from "react";
 class Reviews extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
-componentDidMount() 
+  componentDidMount() {}
   render() {
     return <h1>Hi</h1>;
   }
