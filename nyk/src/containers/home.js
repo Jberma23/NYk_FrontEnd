@@ -60,6 +60,69 @@ class Home extends Component {
     }
   };
 
+  handleCreateChange = event => {
+    const exp = `${event.target.id}`;
+
+    if (exp === "First_name") {
+      this.setState({
+        createAccountInfo: {
+          ...this.state.createAccountInfo,
+          firstName: event.target.value
+        }
+      });
+    } else if (exp === "Last_name") {
+      this.setState({
+        createAccountInfo: {
+          ...this.state.createAccountInfo,
+          lastName: event.target.value
+        }
+      });
+    } else if (exp === "Email") {
+      this.setState({
+        createAccountInfo: {
+          ...this.state.createAccountInfo,
+          email: event.target.value
+        }
+      });
+    } else if (exp === "Username") {
+      this.setState({
+        createAccountInfo: {
+          ...this.state.createAccountInfo,
+          username: event.target.value
+        }
+      });
+    } else if (exp === "Password") {
+      this.setState({
+        createAccountInfo: {
+          ...this.state.createAccountInfo,
+          password: event.target.value
+        }
+      });
+    }
+  };
+
+  handleCreateSubmit = event => {
+    event.preventDefault();
+    let data = {
+      first_name: this.state.createAccountInfo.firstName,
+      last_name: this.state.createAccountInfo.lastName,
+      email: this.state.createAccountInfo.email,
+      password: this.state.createAccountInfo.password,
+      username: this.state.createAccountInfo.username
+    };
+
+    fetch("http://localhost:3001/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ data })
+    })
+      .then(resp => console.log(resp.json()))
+      .catch(e => console.error(e));
+  };
+
   handleCreateLoginLink = () => {
     this.setState({ accountCreate: !this.state.accountCreate });
   };
@@ -75,7 +138,11 @@ class Home extends Component {
               handleLoginChange={this.handleLoginChange}
             />
           ) : (
-            <CreateAccount handleCreateLoginLink={this.handleCreateLoginLink} />
+            <CreateAccount
+              handleCreateLoginLink={this.handleCreateLoginLink}
+              handleCreateChange={this.handleCreateChange}
+              handleCreateSubmit={this.handleCreateSubmit}
+            />
           )}
         </div>
       </>

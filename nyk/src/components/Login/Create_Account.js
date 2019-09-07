@@ -10,28 +10,53 @@ class CreateAccount extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={event => this.props.handleCreateSubmit(event)}>
           <label>First Name:</label>
           <br></br>
-          <input type="text" name="first name" placeholder="First Name"></input>
+          <input
+            type="text"
+            id="First_name"
+            placeholder="First Name"
+            onChange={event => this.props.handleCreateChange(event)}
+          ></input>
           <br></br>
           <label>Last Name:</label>
           <br></br>
-          <input type="text" name="Last_name" placeholder="Last Name"></input>
+          <input
+            type="text"
+            id="Last_name"
+            placeholder="Last Name"
+            onChange={event => this.props.handleCreateChange(event)}
+          ></input>
           <br></br>
           <label>Email:</label>
           <br></br>
-          <input type="text" name="Email" placeholder="Email"></input>
+          <input
+            type="text"
+            id="Email"
+            placeholder="Email"
+            onChange={event => this.props.handleCreateChange(event)}
+          ></input>
           <br></br>
           <label>Username:</label>
           <br></br>
-          <input type="text" name="Username" placeholder="Username"></input>
+          <input
+            type="text"
+            id="Username"
+            placeholder="Username"
+            onChange={event => this.props.handleCreateChange(event)}
+          ></input>
           <br></br>
           <label>Password:</label>
           <br></br>
-          <input type="password" name="Password" placeholder="Password"></input>
+          <input
+            type="password"
+            id="Password"
+            placeholder="Password"
+            onChange={event => this.props.handleCreateChange(event)}
+          ></input>
           <br></br>
-          <button type="submit" name="Submit" value="Submit">
+          <button type="submit" id="Submit" value="Submit">
             Create Account
           </button>
           <br></br>
