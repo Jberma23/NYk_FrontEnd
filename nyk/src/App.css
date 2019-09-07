@@ -23,7 +23,11 @@
   color: #61dafb;
 }
 
-
+a.isDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
 
 @keyframes App-logo-spin {
   from {
