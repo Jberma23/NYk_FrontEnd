@@ -28,7 +28,7 @@ class Home extends Component {
   componentDidMount() {
     fetch("http://localhost:3001/users")
       .then(resp => resp.json())
-      .then(users => this.setState({ users: users.data }))
+      .then(users => this.setState({ users: users }))
       .catch(e => console.error(e));
   }
 
@@ -36,8 +36,8 @@ class Home extends Component {
     event.preventDefault();
     let user = this.state.users.find(
       user =>
-        user.attributes.username === this.state.loginInfo.username &&
-        user.attributes.password === this.state.loginInfo.password
+        user.username === this.state.loginInfo.username &&
+        user.password === this.state.loginInfo.password
     );
     if (user) {
       this.setState({ current_user: user, loggedIn: true });
@@ -103,7 +103,7 @@ class Home extends Component {
 
   handleCreateSubmit = event => {
     event.preventDefault();
-    let data = {
+    let user = {
       first_name: this.state.createAccountInfo.firstName,
       last_name: this.state.createAccountInfo.lastName,
       email: this.state.createAccountInfo.email,
@@ -117,12 +117,10 @@ class Home extends Component {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "http://localhost:3001/users"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(user)
     })
       .then(res => res.json())
-      .then(response =>
-        this.setState({ users: [...this.state.users, response] })
-      )
+      .then(response => console.log(response))
       .catch(e => console.error(e));
   };
 
