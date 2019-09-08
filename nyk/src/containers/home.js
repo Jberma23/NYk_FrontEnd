@@ -132,7 +132,9 @@ class Home extends Component {
     return (
       <>
         <div>
-          {this.state.accountCreate === false ? (
+          {this.state.loggedIn ? (
+            <Dashboard />
+          ) : this.state.accountCreate === false ? (
             <Login
               handleCreateLoginLink={this.handleCreateLoginLink}
               handleLoginSubmit={this.handleLoginSubmit}

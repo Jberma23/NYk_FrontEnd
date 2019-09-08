@@ -29,7 +29,11 @@ class DashBoard extends Component {
   }
   componentDidMount() {}
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h1>Hi this is you DashBoard</h1>
+      </div>
+    );
   }
 }
 
