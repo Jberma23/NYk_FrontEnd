@@ -119,8 +119,10 @@ class Home extends Component {
       },
       body: JSON.stringify(data)
     })
-      .then(res => console.log(res))
-      .then(response => console.log(response))
+      .then(res => res.json())
+      .then(response =>
+        this.setState({ users: [...this.state.users, response] })
+      )
       .catch(e => console.error(e));
   };
 
