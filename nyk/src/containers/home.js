@@ -117,7 +117,7 @@ class Home extends Component {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify({ data })
+      body: JSON.stringify(data)
     })
       .then(resp => console.log(resp.json()))
       .catch(e => console.error(e));
