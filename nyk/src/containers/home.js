@@ -110,16 +110,17 @@ class Home extends Component {
       password: this.state.createAccountInfo.password,
       username: this.state.createAccountInfo.username
     };
-
     fetch("http://localhost:3001/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3001/users"
       },
       body: JSON.stringify(data)
     })
-      .then(resp => console.log(resp.json()))
+      .then(res => console.log(res))
+      .then(response => console.log(response))
       .catch(e => console.error(e));
   };
 
