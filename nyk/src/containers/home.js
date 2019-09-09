@@ -133,7 +133,7 @@ class Home extends Component {
       <>
         <div>
           {this.state.loggedIn ? (
-            <Dashboard />
+            <Dashboard currentUserId={this.state.current_user.id} />
           ) : this.state.accountCreate === false ? (
             <Login
               handleCreateLoginLink={this.handleCreateLoginLink}
