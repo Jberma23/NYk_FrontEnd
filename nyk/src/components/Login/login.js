@@ -36,13 +36,7 @@ class Login extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <NavLink
-          href="http://localhost:3000/register"
-          path="/register"
-          render={() => (
-            <CreateAccount handleLoginChange={this.props.handleLoginChange} />
-          )}
-        >
+        <NavLink href="#" onClick={this.props.handleCreateLoginLink}>
           Create an account
         </NavLink>
       </div>

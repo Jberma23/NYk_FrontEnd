@@ -4,18 +4,15 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Home from "./containers/home";
 import Login from "./components/Login/login";
 import CreateAccount from "./components/Login/Create_Account";
 
 ReactDOM.render(
-  //   <Router>
-  //     <Route exact path="/" render={routerProps => <Home />} />
-  //     <Route exact path="/login" render={routerProps => <Login />} />
-  //     <Route exact path="/register" render={routerProps => <CreateAccount />} />
-  //   </Router>,
-  <App />,
+  <Router>
+    <App />
+  </Router>,
   document.getElementById("root")
 );
 // <App />

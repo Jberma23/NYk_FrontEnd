@@ -3,10 +3,9 @@ import Login from "../components/Login/login";
 import CreateAccount from "../components/Login/Create_Account";
 import Dashboard from "./DashBoard";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       users: [],
       loginInfo: {
@@ -134,7 +133,7 @@ class Home extends Component {
       <>
         <div>
           {this.state.loggedIn ? (
-            <Dashboard currentUserId={this.state.current_user.id} />
+            <Dashboard />
           ) : this.state.accountCreate === false ? (
             <Login
               handleCreateLoginLink={this.handleCreateLoginLink}

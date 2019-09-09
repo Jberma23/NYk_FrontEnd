@@ -63,12 +63,7 @@ class CreateAccount extends Component {
           <br></br>
           <br></br>
           <br></br>
-          <NavLink
-            href="http://localhost:3000/login"
-            // onClick={this.props.handleCreateLoginLink}
-            path="/login"
-            render={() => <Login />}
-          >
+          <NavLink href="#" onClick={this.props.handleCreateLoginLink}>
             Login
           </NavLink>
         </form>
