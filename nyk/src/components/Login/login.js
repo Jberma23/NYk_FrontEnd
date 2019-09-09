@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Nav, NavItem, NavLink } from "reactstrap";
+import CreateAccount from "./Create_Account";
 
 class Login extends Component {
   constructor(props) {
@@ -35,7 +36,13 @@ class Login extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <NavLink href="#" onClick={this.props.handleCreateLoginLink}>
+        <NavLink
+          href="http://localhost:3000/register"
+          path="/register"
+          render={() => (
+            <CreateAccount handleLoginChange={this.props.handleLoginChange} />
+          )}
+        >
           Create an account
         </NavLink>
       </div>

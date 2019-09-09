@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import Login from "../components/Login/login";
 import CreateAccount from "../components/Login/Create_Account";
 import Dashboard from "./DashBoard";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       users: [],
       loginInfo: {
