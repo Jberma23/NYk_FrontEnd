@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Login from "../../components/Login/login";
 import CreateAccount from "../../components/Login/Create_Account";
 import Dash from "../Post_Login/Dash";
+import DashBoard from "../Post_Login/DashBoard";
 import { Switch, Route, Redirect } from "react-router-dom";
 class Home extends Component {
   constructor(props) {
@@ -21,15 +22,32 @@ class Home extends Component {
       },
       current_user: null,
       accountCreate: false,
-      loggedIn: false
+      loggedIn: false,
+      plans: [],
+      restaurants: [],
+      reviews: [],
+      current_user: props.current_user
     };
   }
-
-  componentDidMount() {
+  async componentDidMount() {
     fetch("http://localhost:3001/users")
       .then(resp => resp.json())
       .then(users => this.setState({ users: users }))
       .catch(e => console.error(e));
+
+    await fetch("http://localhost:3001/plans")
+      .then(res => res.json())
+      .then(plans =>
+        this.setState({
+          plans: plans
+        })
+      );
+    await fetch("http://localhost:3001/restaurants")
+      .then(res => res.json())
+      .then(restaurants => this.setState({ restaurants: restaurants }));
+    await fetch("http://localhost:3001/reviews")
+      .then(res => res.json())
+      .then(reviews => this.setState({ reviews: reviews }));
   }
 
   handleLoginSubmit = event => {
@@ -131,26 +149,40 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Route
-          path="/dashboard"
-          exact
-          strict
-          render={() =>
-            this.state.loggedIn ? <Dash /> : <Redirect to="/login" />
-          }
-        />
-        <Route
-          path="/login"
-          exact
-          strict
-          render={() => (
-            <Login
-              handleCreateLoginLink={this.handleCreateLoginLink}
-              handleLoginSubmit={this.handleLoginSubmit}
-              handleLoginChange={this.handleLoginChange}
-            />
-          )}
-        />
+        <div className="App">
+          <Route
+            to="/dashboard"
+            exact
+            strict
+            render={() =>
+              this.state.loggedIn ? (
+                <DashBoard
+                  plans={this.state.plans.filter(
+                    plans => plans.user_id === this.state.current_user.id
+                  )}
+                  reviews={this.state.reviews.filter(
+                    review => review.user_id === this.state.current_user.id
+                  )}
+                  restaurants={this.state.restaurants}
+                />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          />
+          <Route
+            path="/"
+            exact
+            strict
+            render={() => (
+              <Login
+                handleCreateLoginLink={this.handleCreateLoginLink}
+                handleLoginSubmit={this.handleLoginSubmit}
+                handleLoginChange={this.handleLoginChange}
+              />
+            )}
+          />
+        </div>
       </>
     );
   }
