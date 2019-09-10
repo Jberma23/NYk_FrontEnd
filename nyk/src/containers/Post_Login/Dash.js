@@ -13,18 +13,18 @@ class Dash extends Component {
       current_user: props.current_user
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:3001/plans")
+  async componentDidMount() {
+    await fetch("http://localhost:3001/plans")
       .then(res => res.json())
       .then(plans =>
         this.setState({
           plans: plans
         })
       );
-    fetch("http://localhost:3001/restaurants")
+    await fetch("http://localhost:3001/restaurants")
       .then(res => res.json())
       .then(restaurants => this.setState({ restaurants: restaurants }));
-    fetch("http://localhost:3001/reviews")
+    await fetch("http://localhost:3001/reviews")
       .then(res => res.json())
       .then(reviews => this.setState({ reviews: reviews }));
   }

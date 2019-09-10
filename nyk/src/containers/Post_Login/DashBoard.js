@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Plans from "../../components/Plans";
 import Reviews from "../../components/Reviews";
-import Friends from "../../components/Friends";
+// import Friends from "../../components/Friends";
 import {
   Collapse,
   Navbar,
@@ -54,7 +54,11 @@ class DashBoard extends Component {
       return dateA - dateB;
     });
     return sorted.slice(0, 4).map(plan => {
-      return <Plans key={plan.id} plan={plan} />;
+      let restaurant = this.props.restaurants.find(restaurant => {
+        return restaurant.id === plan.restaurant_id;
+      });
+
+      return <Plans restaurant={restaurant} key={plan.id} plan={plan} />;
     });
   };
   sortFuturePlans = () => {
@@ -67,23 +71,31 @@ class DashBoard extends Component {
       return dateA - dateB;
     });
     return sorted.slice(0, 4).map(plan => {
-      return <Plans key={plan.id} plan={plan} />;
+      let restaurant = this.props.restaurants.find(restaurant => {
+        return restaurant.id === plan.restaurant_id;
+      });
+      return <Plans key={plan.id} restaurants={restaurant} plan={plan} />;
     });
   };
 
   renderReviews = () => {
     let reviews = [...this.props.reviews].sort(function(a, b) {
-      return a.rating - b.rating;
+      return b.rating - a.rating;
     });
-    return reviews
-      .slice(0, 5)
-      .map(review => <Reviews key={review.id} review={review} />);
+    return reviews.slice(0, 4).map(review => {
+      let restaurant1 = this.props.restaurants.find(restaurant => {
+        return restaurant.id === review.restaurant_id;
+      });
+      return (
+        <Reviews key={review.id} review={review} restaurants={restaurant1} />
+      );
+    });
   };
 
   sortRestaurants = () => {
-    let restaurant = this.state.restaurants.filter(restaurant =>
-      this.state.reviews.includes(restaurant.id)
-    );
+    let restaurant = this.state.restaurants.filter(restaurant => {
+      return this.state.reviews.includes(restaurant.id);
+    });
     console.log(restaurant);
   };
 
@@ -117,6 +129,8 @@ class DashBoard extends Component {
           <div className="row">{this.sortPastPlans()}</div>
           <h1>Your Reviews</h1>
           <div className="row">{this.renderReviews()}</div>
+          {/* <h1>Your Favorite Restaurants</h1>
+          <div className="row">{this.sortRestaurants()}</div> */}
         </div>
       </div>
     );
