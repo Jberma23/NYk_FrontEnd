@@ -12,7 +12,7 @@ class Restaurant extends Component {
 
   render() {
     return (
-      <div class="ui link cards">
+      <div class="ui column ">
         <div class="card">
           <div class="image">
             <img src={this.props.restaurant.url} />
