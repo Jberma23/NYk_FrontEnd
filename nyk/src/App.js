@@ -7,6 +7,18 @@ import Dash from "./containers/Post_Login/Dash";
 import CreateAccount from "./components/Login/Create_Account";
 import Login from "./components/Login/login";
 
+
+class  extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {  }
+  }
+  render() { 
+    return (  );
+  }
+}
+ 
+export default ;
 function App() {
   return (
     <Router>

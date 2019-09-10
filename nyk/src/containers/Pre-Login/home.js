@@ -3,6 +3,7 @@ import Login from "../../components/Login/login";
 import CreateAccount from "../../components/Login/Create_Account";
 import Dash from "../Post_Login/Dash";
 import { Switch, Route, Redirect } from "react-router-dom";
+import DashBoard from "../Post_Login/DashBoard";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -132,28 +133,93 @@ class Home extends Component {
     return (
       <>
         <Route
-          path="/dashboard"
+          path="/dash"
+          exact
+          strict
+          render={() => (this.state.loggedIn ? <Dash /> : <Redirect to="/" />)}
+        />
+        <Route
+          path="/"
           exact
           strict
           render={() =>
-            this.state.loggedIn ? <Dash /> : <Redirect to="/login" />
+            this.state.loggedIn ? (
+              <Redirect to="/dash" />
+            ) : (
+              <Login
+                handleCreateLoginLink={this.handleCreateLoginLink}
+                handleLoginSubmit={this.handleLoginSubmit}
+                handleLoginChange={this.handleLoginChange}
+              />
+            )
           }
         />
         <Route
-          path="/login"
+          path="/register"
           exact
           strict
           render={() => (
-            <Login
+            <CreateAccount
               handleCreateLoginLink={this.handleCreateLoginLink}
               handleLoginSubmit={this.handleLoginSubmit}
               handleLoginChange={this.handleLoginChange}
             />
           )}
         />
+    
+        
       </>
     );
   }
 }
 
-export default Home;
+
+class Dash extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      plans: [],
+      restaurants: [],
+      reviews: [],
+      current_user: props.current_user
+    };
+  }
+  async componentDidMount() {
+    await fetch("http://localhost:3001/plans")
+      .then(res => res.json())
+      .then(plans =>
+        this.setState({
+          plans: plans
+        })
+      );
+    await fetch("http://localhost:3001/restaurants")
+      .then(res => res.json())
+      .then(restaurants => this.setState({ restaurants: restaurants }));
+    await fetch("http://localhost:3001/reviews")
+      .then(res => res.json())
+      .then(reviews => this.setState({ reviews: reviews }));
+  }
+
+  render() {
+    return (
+      <Route
+        path="/dashboard"
+        exact
+        strict
+        render={() => (
+          <DashBoard
+            plans={this.state.plans.filter(
+              plans => plans.user_id === this.state.current_user.id
+            )}
+            reviews={this.state.reviews.filter(
+              review => review.user_id === this.state.current_user.id
+            )}
+            restaurants={this.state.restaurants}
+          />
+        )}
+      />
+    );
+  }
+}
+
+export default Dash;

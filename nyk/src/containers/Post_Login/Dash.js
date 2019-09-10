@@ -31,17 +31,22 @@ class Dash extends Component {
 
   render() {
     return (
-      <Route>
-        <DashBoard
-          plans={this.state.plans.filter(
-            plans => plans.user_id === this.state.current_user.id
-          )}
-          reviews={this.state.reviews.filter(
-            review => review.user_id === this.state.current_user.id
-          )}
-          restaurants={this.state.restaurants}
-        />
-      </Route>
+      <Route
+        path="/dashboard"
+        exact
+        strict
+        render={() => (
+          <DashBoard
+            plans={this.state.plans.filter(
+              plans => plans.user_id === this.state.current_user.id
+            )}
+            reviews={this.state.reviews.filter(
+              review => review.user_id === this.state.current_user.id
+            )}
+            restaurants={this.state.restaurants}
+          />
+        )}
+      />
     );
   }
 }
