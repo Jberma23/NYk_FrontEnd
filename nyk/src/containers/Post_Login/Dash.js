@@ -35,7 +35,7 @@ class Dash extends Component {
         path="/dashboard"
         exact
         strict
-        render={() => (
+        render={
           <DashBoard
             plans={this.state.plans.filter(
               plans => plans.user_id === this.state.current_user.id
@@ -45,7 +45,7 @@ class Dash extends Component {
             )}
             restaurants={this.state.restaurants}
           />
-        )}
+        }
       />
     );
   }

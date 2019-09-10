@@ -55,6 +55,7 @@ class App extends React.Component {
 
   handleLoginSubmit = event => {
     event.preventDefault();
+
     let user = this.state.users.find(
       user =>
         user.username === this.state.loginInfo.username &&
@@ -152,17 +153,11 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return !!this.state.current_user ? (
-                <Redirect to="/dashboard" />
-              ) : (
-                <Redirect to="/login" />
-              );
-            }}
-          />
+          {this.state.current_user === null ? (
+            <Redirect to="/login" />
+          ) : (
+            <Redirect to="/dashboard" />
+          )}
           <Route
             exact
             path="/login"
@@ -180,7 +175,19 @@ class App extends React.Component {
             exact
             path="/dashboard"
             render={() => {
-              return <Dash />;
+              return (
+                <DashBoard
+                  let
+                  c_user={this.state.current_user}
+                  plans={this.state.plans.filter(
+                    plans => plans.user_id === this.state.current_user.id
+                  )}
+                  reviews={this.state.reviews.filter(
+                    review => review.user_id === this.state.current_user.id
+                  )}
+                  restaurants={this.state.restaurants}
+                />
+              );
             }}
           />
           <Route
