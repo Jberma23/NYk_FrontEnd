@@ -17,7 +17,6 @@ class Reviews extends Component {
     //   return restaurant.id === id;
     // });
     // this.setState({ restaurant: filtered });
-    debugger;
   }
   render() {
     return (

@@ -93,10 +93,12 @@ class DashBoard extends Component {
   };
 
   sortRestaurants = () => {
-    let restaurant = this.state.restaurants.filter(restaurant => {
-      return this.state.reviews.includes(restaurant.id);
+    let restaurants = [...this.props.restaurants].sort(function(a, b) {
+      return b.avg_review - a.avg_review;
     });
-    console.log(restaurant);
+    return restaurants.slice(0, 6).map(restaurant => {
+      return <Restaurant key={restaurant.id} restaurant={restaurant} />;
+    });
   };
 
   render() {
@@ -129,8 +131,8 @@ class DashBoard extends Component {
           <div className="row">{this.sortPastPlans()}</div>
           <h1>Your Reviews</h1>
           <div className="row">{this.renderReviews()}</div>
-          {/* <h1>Your Favorite Restaurants</h1>
-          <div className="row">{this.sortRestaurants()}</div> */}
+          <h1>Top Rated Restaurants</h1>
+          <div className="row">{this.sortRestaurants()}</div>
         </div>
       </div>
     );
