@@ -12,6 +12,7 @@ class Plans extends Component {
         <div className="ui card" key={this.props.plan.id}>
           <div className="content">
             <div className="header">{this.props.plan.name}</div>
+            <div className="header">Restaurant: {this.props.restaurant}</div>
             <div className="meta text-wrap">
               <small>Date: {this.props.plan.date}</small>
             </div>

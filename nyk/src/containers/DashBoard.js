@@ -71,7 +71,13 @@ class DashBoard extends Component {
           <h1>Upcoming Plans</h1>
           <div className="row">
             {this.state.plans.map(plan => (
-              <Plans plan={plan} key={plan.id} />
+              <Plans
+                plan={plan}
+                key={plan.id}
+                restaurants={this.state.restaurants.filter(
+                  restaurant => restaurant.id === plan.restaurant_id
+                )}
+              />
             ))}
           </div>
         </div>
