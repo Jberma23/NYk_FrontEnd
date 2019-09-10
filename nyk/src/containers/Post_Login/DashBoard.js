@@ -72,10 +72,19 @@ class DashBoard extends Component {
   };
 
   renderReviews = () => {
-    let reviews = [...this.props.reviews].filter(review => 
-    return this.state.reviews
+    let reviews = [...this.props.reviews].sort(function(a, b) {
+      return a.rating - b.rating;
+    });
+    return reviews
       .slice(0, 5)
       .map(review => <Reviews key={review.id} review={review} />);
+  };
+
+  sortRestaurants = () => {
+    let restaurant = this.state.restaurants.filter(restaurant =>
+      this.state.reviews.includes(restaurant.id)
+    );
+    console.log(restaurant);
   };
 
   render() {

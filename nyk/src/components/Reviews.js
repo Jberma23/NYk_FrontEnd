@@ -3,7 +3,10 @@ import React, { Component } from "react";
 class Reviews extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      rating: props.rating,
+      restaurant: []
+    };
   }
   componentDidMount() {}
   render() {
