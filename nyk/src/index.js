@@ -5,9 +5,6 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import Home from "./containers/home";
-import Login from "./components/Login/login";
-import CreateAccount from "./components/Login/Create_Account";
 
 ReactDOM.render(
   <Router>

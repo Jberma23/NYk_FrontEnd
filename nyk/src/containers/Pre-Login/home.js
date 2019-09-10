@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Login from "../components/Login/login";
-import CreateAccount from "../components/Login/Create_Account";
-import Dashboard from "./DashBoard";
+import Login from "../../components/Login/login";
+import CreateAccount from "../../components/Login/Create_Account";
+import Dash from "../Post_Login/Dash";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 class Home extends Component {
   constructor(props) {
@@ -133,7 +133,7 @@ class Home extends Component {
       <>
         <div>
           {this.state.loggedIn ? (
-            <Dashboard />
+            <Dash current_user={this.state.current_user} />
           ) : this.state.accountCreate === false ? (
             <Login
               handleCreateLoginLink={this.handleCreateLoginLink}
