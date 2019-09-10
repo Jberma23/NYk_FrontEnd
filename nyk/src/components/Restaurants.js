@@ -12,22 +12,22 @@ class Restaurant extends Component {
 
   render() {
     return (
-      <div class="ui column ">
-        <div class="card">
-          <div class="image">
+      <div className="ui column ">
+        <div className="card">
+          <div className="image">
             <img src={this.props.restaurant.url} />
           </div>
-          <div class="content">
-            <div class="header">{this.props.restaurant.name}</div>
-            <div class="meta">
+          <div className="content">
+            <div className="header">{this.props.restaurant.name}</div>
+            <div className="meta">
               <a>{this.props.restaurant.categories} </a>
             </div>
-            <div class="description">{this.props.restaurant.location}</div>
+            <div className="description">{this.props.restaurant.location}</div>
           </div>
-          <div class="extra content">
-            <span class="right floated">{this.props.restaurant.price}</span>
+          <div className="extra content">
+            <span className="right floated">{this.props.restaurant.price}</span>
             <span>
-              <i class="user icon"></i>
+              <i className="user icon"></i>
               {this.props.restaurant.avg_review}
             </span>
           </div>

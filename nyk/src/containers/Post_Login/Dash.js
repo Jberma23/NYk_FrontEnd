@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DashBoard from "./DashBoard";
 import RestaurantContainer from "./RestaurantContainer";
 import PlansContainer from "./PlansContainer";
-
+import { Router, Route } from "react";
 class Dash extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +31,7 @@ class Dash extends Component {
 
   render() {
     return (
-      <div>
+      <Route>
         <DashBoard
           plans={this.state.plans.filter(
             plans => plans.user_id === this.state.current_user.id
@@ -41,7 +41,7 @@ class Dash extends Component {
           )}
           restaurants={this.state.restaurants}
         />
-      </div>
+      </Route>
     );
   }
 }

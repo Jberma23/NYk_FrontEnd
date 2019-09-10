@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Login from "../../components/Login/login";
 import CreateAccount from "../../components/Login/Create_Account";
 import Dash from "../Post_Login/Dash";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -131,23 +131,26 @@ class Home extends Component {
   render() {
     return (
       <>
-        <div>
-          {this.state.loggedIn ? (
-            <Dash current_user={this.state.current_user} />
-          ) : this.state.accountCreate === false ? (
+        <Route
+          path="/dashboard"
+          exact
+          strict
+          render={() =>
+            this.state.loggedIn ? <Dash /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          path="/login"
+          exact
+          strict
+          render={() => (
             <Login
               handleCreateLoginLink={this.handleCreateLoginLink}
               handleLoginSubmit={this.handleLoginSubmit}
               handleLoginChange={this.handleLoginChange}
             />
-          ) : (
-            <CreateAccount
-              handleCreateLoginLink={this.handleCreateLoginLink}
-              handleCreateChange={this.handleCreateChange}
-              handleCreateSubmit={this.handleCreateSubmit}
-            />
           )}
-        </div>
+        />
       </>
     );
   }

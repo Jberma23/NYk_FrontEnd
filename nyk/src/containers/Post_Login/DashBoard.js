@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Plans from "../../components/Plans";
 import Reviews from "../../components/Reviews";
 // import Friends from "../../components/Friends";
+
 import {
   Collapse,
   Navbar,
@@ -118,7 +119,12 @@ class DashBoard extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/reviews/">Reviews</NavLink>
+                <NavLink
+                  to="/reviews"
+                  render={<Reviews reviews={this.state.reviews} />}
+                >
+                  Reviews
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/plans/">Plans</NavLink>
@@ -133,7 +139,7 @@ class DashBoard extends Component {
           </Collapse>
         </Navbar>
         <div className="ui four column grid">
-          <h1>Upcoming Plans</h1>
+          <h1 className="ui center aligned header">Upcoming Plans</h1>
           <div className="row">{this.sortFuturePlans()}</div>
           <h1>Past Plans</h1>
           <div className="row">{this.sortPastPlans()}</div>
