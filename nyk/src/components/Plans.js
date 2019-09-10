@@ -5,7 +5,7 @@ class Plans extends Component {
     super(props);
     this.state = {
       plan: props.plan,
-      restaurants: props.restaurants
+      restaurant: props.restaurants
     };
   }
 
@@ -26,11 +26,11 @@ class Plans extends Component {
           <div className="content">
             <div className="header">{this.state.plan.name}</div>
             <div className="meta text-wrap">
-              {this.state.restaurant ? (
-                <Fragment>
-                  <div className="body">{this.state.restaurant.name}</div>
-                  <div className="body">{this.state.restaurant.location}</div>
-                </Fragment>
+              {this.props.restaurants ? (
+                <div>
+                  <div className="body">{this.props.restaurants.name}</div>
+                  <div className="body">{this.props.restaurants.location}</div>
+                </div>
               ) : null}
               <small>Date: {this.state.plan.date}</small>
             </div>

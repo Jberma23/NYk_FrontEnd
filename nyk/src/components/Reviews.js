@@ -27,15 +27,12 @@ class Reviews extends Component {
               <div className="header">{this.state.restaurant.name}</div>
             ) : null}
             <div className="meta text-wrap">
-              {this.state.restaurant ? (
+              {!!this.props.restaurants ? (
                 <div className="body">
-                  Rating: {this.state.review.rating}
-                  <br></br>
-                  Location: {this.state.restaurant.location}
+                  <p>Rating: {this.props.review.rating}</p>
+                  <p>Location: {this.props.restaurants.location}</p>
                 </div>
-              ) : (
-                <div className="body">{this.state.review.rating}</div>
-              )}
+              ) : null}
               <small>Date: {this.state.review.created_at}</small>
             </div>
           </div>

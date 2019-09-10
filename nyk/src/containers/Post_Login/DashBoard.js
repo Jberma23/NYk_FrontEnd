@@ -58,7 +58,7 @@ class DashBoard extends Component {
         return restaurant.id === plan.restaurant_id;
       });
 
-      return <Plans restaurant={restaurant} key={plan.id} plan={plan} />;
+      return <Plans restaurants={restaurant} key={plan.id} plan={plan} />;
     });
   };
   sortFuturePlans = () => {
@@ -74,7 +74,15 @@ class DashBoard extends Component {
       let restaurant = this.props.restaurants.find(restaurant => {
         return restaurant.id === plan.restaurant_id;
       });
-      return <Plans key={plan.id} restaurants={restaurant} plan={plan} />;
+      return (
+        <Plans
+          key={plan.id}
+          restaurants={this.props.restaurants.find(restaurant => {
+            return restaurant.id === plan.restaurant_id;
+          })}
+          plan={plan}
+        />
+      );
     });
   };
 
@@ -96,7 +104,7 @@ class DashBoard extends Component {
     let restaurants = [...this.props.restaurants].sort(function(a, b) {
       return b.avg_review - a.avg_review;
     });
-    return restaurants.slice(0, 6).map(restaurant => {
+    return restaurants.slice(0, 4).map(restaurant => {
       return <Restaurant key={restaurant.id} restaurant={restaurant} />;
     });
   };
@@ -131,7 +139,7 @@ class DashBoard extends Component {
           <div className="row">{this.sortPastPlans()}</div>
           <h1>Your Reviews</h1>
           <div className="row">{this.renderReviews()}</div>
-          <h1>Top Rated Restaurants</h1>
+          <h1>Top Rated Restaurant</h1>
           <div className="row">{this.sortRestaurants()}</div>
         </div>
       </div>
