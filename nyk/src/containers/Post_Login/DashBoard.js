@@ -127,13 +127,13 @@ class DashBoard extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/plans/">Plans</NavLink>
+                <NavLink to="/plans">Plans</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/restaurants/">Restaurants</NavLink>
+                <NavLink to="/restaurants">Restaurants</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/friends/">Friends</NavLink>
+                <NavLink to="/friends">Friends</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
