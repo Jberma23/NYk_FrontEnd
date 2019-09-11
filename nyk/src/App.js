@@ -205,7 +205,7 @@ class App extends React.Component {
             path="/restaurants"
             render={() => {
               return (
-                <RestaurantContainer restaurants={this.state.restaurants} />
+                <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} />
               );
 
             }}

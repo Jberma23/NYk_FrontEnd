@@ -18,16 +18,25 @@ class RestaurantContainer extends Component {
       rating: [...col.slice(0, i),
       { ...restaurant, rating: event.target.value },
       ...col.slice(i + 1)]
-    }
-    fetch("http://localhost:3001/reviews", {
-      method: "Post"
-      headers: {
-        "Accepts": "application/json"
-      "Allows": "application/json"
-      }
     })
-    )
-
+    let user_id = this.props.current_user.id
+    let restaurant_id = restaurant.id
+    let rating = event.target.value
+    fetch("http://localhost:3001/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "user_id": user_id,
+        "restaurant_id": restaurant_id,
+        "rating": rating
+      })
+    })
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+      .catch(e => console.error(e))
   };
   render() {
     return this.state.restaurants.map(restaurant => (
