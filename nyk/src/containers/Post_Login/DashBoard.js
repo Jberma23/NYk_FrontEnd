@@ -50,7 +50,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date <= this.state.date
     );
-    let sorted = planz.sort(function(a, b) {
+    let sorted = planz.sort(function (a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -67,7 +67,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date >= this.state.date
     );
-    let sorted = planz.sort(function(a, b) {
+    let sorted = planz.sort(function (a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -89,7 +89,7 @@ class DashBoard extends Component {
   };
 
   renderReviews = () => {
-    let reviews = [...this.props.reviews].sort(function(a, b) {
+    let reviews = [...this.props.reviews].sort(function (a, b) {
       return b.rating - a.rating;
     });
     return reviews.slice(0, 4).map(review => {
@@ -97,13 +97,13 @@ class DashBoard extends Component {
         return restaurant.id === review.restaurant_id;
       });
       return (
-        <Reviews key={review.id} review={review} restaurants={restaurant1} />
+        <Reviews key={review.id} review={review} restaurant={restaurant1} />
       );
     });
   };
 
   sortRestaurants = () => {
-    let restaurants = [...this.props.restaurants].sort(function(a, b) {
+    let restaurants = [...this.props.restaurants].sort(function (a, b) {
       return b.avg_review - a.avg_review;
     });
     return restaurants.slice(0, 4).map(restaurant => {

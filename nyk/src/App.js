@@ -143,7 +143,14 @@ class App extends React.Component {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "http://localhost:3001/users"
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify({
+        "first_name": this.state.createAccountInfo.firstName,
+        "last_name": this.state.createAccountInfo.lastName,
+        "email": this.state.createAccountInfo.email,
+        "password": this.state.createAccountInfo.password,
+        "username": this.state.createAccountInfo.username
+      }
+      )
     })
       .then(res => res.json())
       .then(response => console.log(response))
@@ -160,8 +167,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-            <Redirect to="/dashboard" />
-          )}
+              <Redirect to="/dashboard" />
+            )}
           <Route
             exact
             path="/login"
@@ -206,7 +213,9 @@ class App extends React.Component {
             path="/restaurants"
             render={() => {
               return (
-                <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} />
+                <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} reviews={this.state.reviews.filter(
+                  review => review.user_id === this.state.current_user.id
+                )} />
               );
             }}
           />
@@ -214,7 +223,7 @@ class App extends React.Component {
             exact
             path="/reviews"
             render={() => {
-              return <ReviewContainer reviews={this.state.reviews} />;
+              return <ReviewContainer reviews={this.state.reviews} restaurants={this.state.restaurants} />;
             }}
           />
         </div>

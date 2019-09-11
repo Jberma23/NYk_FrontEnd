@@ -35,6 +35,7 @@ class Restaurant extends Component {
             <span>
               {
                 <ReviewForm
+                  review={this.props.review}
                   key={this.props.restaurant.id}
                   id={this.props.restaurant.id}
                   restaurant={this.props.restaurant}

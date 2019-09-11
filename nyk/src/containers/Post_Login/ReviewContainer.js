@@ -4,13 +4,26 @@ import Review from "../../components/Reviews";
 class ReviewContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      restaurant: props.restaurants
+    };
   }
 
+  renderRestaurant() {
+    debugger
+
+  }
+
+
+
+
   render() {
-    return this.props.reviews.map(review => (
-      <Review review={review} key={review.id} />
-    ));
+    debugger
+    return (
+      this.props.reviews.map(review => {
+        return <Review review={review} restaurant={this.props.restaurants.find(rest => { return rest.id === review.restaurant_id })} key={review.id} />
+      })
+    )
   }
 }
 

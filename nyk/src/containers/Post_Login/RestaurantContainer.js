@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Restaurant from "../../components/Restaurants";
+import Restaurants from "../../components/Restaurants";
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -11,27 +11,6 @@ class RestaurantContainer extends Component {
   }
   handleRatingChange = (event, restaurant) => {
     debugger;
-<<<<<<< HEAD
-    restaurant.rating = event.target.value;
-    let col = [...this.state.restaurants];
-    let i = col.indexOf(restaurant);
-    this.setState(
-      {
-        rating: [
-          ...col.slice(0, i),
-          { ...restaurant, rating: event.target.value },
-          ...col.slice(i + 1)
-        ]
-      },
-      fetch("http://localhost:3001/reviews", {
-        method: "Post",
-        headers: {
-          Accepts: "application/json",
-          Allows: "application/json"
-        }
-      })
-    );
-=======
     restaurant.rating = event.target.value
     let col = [...this.state.restaurants]
     let i = col.indexOf(restaurant)
@@ -58,11 +37,11 @@ class RestaurantContainer extends Component {
       .then(resp => resp.json())
       .then(data => console.log(data))
       .catch(e => console.error(e))
->>>>>>> form
   };
   render() {
     return this.state.restaurants.map(restaurant => (
-      <Restaurant
+      <Restaurants
+        review={this.props.reviews.find(reviews => reviews.restaurant_id === restaurant.id)}
         restaurant={restaurant}
         handleRatingChange={this.handleRatingChange}
         key={restaurant.id}
