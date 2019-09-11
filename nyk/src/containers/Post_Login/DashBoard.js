@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Plans from "../../components/Plans";
 import Reviews from "../../components/Reviews";
+import Restaurants from "../../components/Restaurants";
 // import Friends from "../../components/Friends";
 import { NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -131,14 +133,15 @@ class DashBoard extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/restaurants">Restaurants</NavLink>
+                <NavLink to="/restaurants">Restaurants </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/friends">Friends</NavLink>
+                <NavLink to="/friends">Friends </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
+
         <div className="ui four column grid">
           <h1 className="ui center aligned header">Upcoming Plans</h1>
           <div className="row">{this.sortFuturePlans()}</div>

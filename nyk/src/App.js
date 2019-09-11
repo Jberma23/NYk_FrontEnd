@@ -7,6 +7,8 @@ import Dash from "./containers/Post_Login/Dash";
 import CreateAccount from "./components/Login/Create_Account";
 import Login from "./components/Login/login";
 import DashBoard from "./containers/Post_Login/DashBoard";
+import Reviews from "./components/Reviews";
+import Restaurants from "./components/Restaurants";
 
 class App extends React.Component {
   constructor() {
@@ -197,6 +199,17 @@ class App extends React.Component {
               return <CreateAccount />;
             }}
           />
+          <Route
+            exact
+            path="/restaurants"
+            render={() => {
+              let restaurants = this.state.restaurants;
+              return restaurants.map(restaurant => {
+                return <Restaurants restaurant={restaurant} />;
+              });
+            }}
+          />
+          <Route exact path="/reviews" component={Reviews} />
         </div>
       </Router>
     );
