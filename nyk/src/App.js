@@ -213,13 +213,16 @@ class App extends React.Component {
             path="/restaurants"
             render={() => {
               return (
-                <RestaurantContainer
-                  current_user={this.state.current_user}
-                  restaurants={this.state.restaurants}
-                  reviews={this.state.reviews.filter(
-                    review => review.user_id === this.state.current_user.id
-                  )}
-                />
+                <div>
+                  <h1>Restaurants</h1>
+                  <RestaurantContainer
+                    current_user={this.state.current_user}
+                    restaurants={this.state.restaurants}
+                    reviews={this.state.reviews.filter(
+                      review => review.user_id === this.state.current_user.id
+                    )}
+                  />
+                </div>
               );
             }}
           />
@@ -228,10 +231,13 @@ class App extends React.Component {
             path="/reviews"
             render={() => {
               return (
-                <ReviewContainer
-                  reviews={this.state.reviews}
-                  restaurants={this.state.restaurants}
-                />
+                <div>
+                  <h1>My Reviews</h1>
+                  <ReviewContainer
+                    reviews={this.state.reviews}
+                    restaurants={this.state.restaurants}
+                  />
+                </div>
               );
             }}
           />
