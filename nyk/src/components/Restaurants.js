@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import ReviewForm from "./ReviewsForm";
 class Restaurant extends Component {
   constructor(props) {
     let { name, location, categories, averageReviews } = props.restaurant;
@@ -25,6 +25,7 @@ class Restaurant extends Component {
             <div className="description">{this.props.restaurant.location}</div>
           </div>
           <div className="extra content">
+            <span>{<ReviewForm />}</span>
             <span className="right floated">{this.props.restaurant.price}</span>
             <span>
               <i className="user icon"></i>
