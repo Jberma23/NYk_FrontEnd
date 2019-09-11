@@ -21,7 +21,7 @@ class Reviews extends Component {
   render() {
     return (
       <div className="ui column">
-        <div className="ui card" key={this.state.review.id}>
+        <div className="ui card" key={this.props.review.id}>
           <div className="content">
             {this.state.restaurant ? (
               <div className="header">{this.state.restaurant.name}</div>
@@ -33,7 +33,7 @@ class Reviews extends Component {
                   <p>Location: {this.props.restaurants.location}</p>
                 </div>
               ) : null}
-              <small>Date: {this.state.review.created_at}</small>
+              <small>Date: {this.props.review.created_at}</small>
             </div>
           </div>
         </div>

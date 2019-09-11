@@ -209,7 +209,16 @@ class App extends React.Component {
               });
             }}
           />
-          <Route exact path="/reviews" component={Reviews} />
+          <Route
+            exact
+            path="/reviews"
+            render={() => {
+              let reviews = this.state.reviews;
+              return reviews.map(review => {
+                return <Reviews review={review} />;
+              });
+            }}
+          />
         </div>
       </Router>
     );
