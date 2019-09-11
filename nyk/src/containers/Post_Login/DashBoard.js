@@ -97,7 +97,7 @@ class DashBoard extends Component {
         return restaurant.id === review.restaurant_id;
       });
       return (
-        <Reviews key={review.id} review={review} restaurant={restaurant1} />
+        <Reviews key={review.id} review={review} restaurants={restaurant1} />
       );
     });
   };

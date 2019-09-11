@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 
+
 class ReviewsForm extends Component {
 
   state = {
@@ -7,132 +8,177 @@ class ReviewsForm extends Component {
   };
 
 
-
   render() {
     return (
-      <Fragment>
-        <form className={`rating`}>
-          <input
-            type="checkbox"
-            id="star5"
-            name="rating"
-            value="5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="full"
-            htmlFor="star5"
-            title="Awesome - 5 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star4half"
-            name="rating"
-            value="4.5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="half"
-            htmlFor="star4half"
-            title="Pretty good - 4.5 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star4"
-            name="rating"
-            value="4"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="full"
-            htmlFor="star4"
-            title="Pretty good - 4 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star3half"
-            name="rating"
-            value="3.5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="half"
-            htmlFor="star3half"
-            title="Meh - 3.5 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star3"
-            name="rating"
-            value="3"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label className="full" htmlFor="star3" title="Meh - 3 stars"></label>
-          <input
-            type="checkbox"
-            id="star2half"
-            name="rating"
-            value="2.5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="half"
-            htmlFor="star2half"
-            title="Kinda bad - 2.5 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star2"
-            name="rating"
-            value="2"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="full"
-            htmlFor="star2"
-            title="Kinda bad - 2 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star1half"
-            name="rating"
-            value="1.5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="half"
-            htmlFor="star1half"
-            title="Meh - 1.5 stars"
-          ></label>
-          <input
-            type="checkbox"
-            id="star1"
-            name="rating"
+      this.props.review ?
+        <Fragment>
+          <form className={`rating`} onChange={(event) => { this.setState({ rating: event.target.value }) }}>
+            {this.props.review.rating >= 1 || this.state.rating >= 1 ?
+              <input
+                type="checkbox"
+                value="1"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="1"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}
+            {this.props.review.rating >= 2 || this.state.rating >= 2 ?
+              <input
+                type="checkbox"
+                value="2"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="2"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}
 
-            value="1"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="full"
-            htmlFor="star1"
-            title="Sucks big time - 1 star"
-          ></label>
-          <input
-            type="checkbox"
-            id="starhalf"
-            name="rating"
-            value=".5"
-            onChange={event => this.props.handleRatingChange(event, this.props.review)}
-          />
-          <label
-            className="half"
-            htmlFor="starhalf"
-            title="Sucks big time - 0.5 stars"
-          ></label>
-        </form>
-      </Fragment>
-    );
+            {this.props.review.rating >= 3 || this.props.restaurant.rating >= 3 ?
+              <input
+                type="checkbox"
+                value="3"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="3"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+            }
+
+            {this.props.review.rating >= 4 || this.props.restaurant.rating >= 4 ?
+              <input
+                type="checkbox"
+                value="4"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="4"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}{this.props.review.rating >= 45 || this.props.restaurant.rating >= 5 ?
+                <input
+                  type="checkbox"
+                  value="5"
+                  checked={true}
+                  onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+                />
+                :
+
+                <input
+                  type="checkbox"
+                  value="5"
+                  checked={null}
+                  onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+                />}
+
+          </form>
+        </Fragment >
+
+
+
+        :
+        <Fragment>
+          <form className={`rating`} onChange={(event) => { this.setState({ rating: event.target.value }) }}>
+            {this.state.rating >= 1 ?
+              <input
+                type="checkbox"
+                value="1"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="1"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}
+            {this.state.rating >= 2 ?
+              <input
+                type="checkbox"
+                value="2"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="2"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}
+
+            {this.state.rating >= 3 ?
+              <input
+                type="checkbox"
+                value="3"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="3"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+            }
+
+            {this.state.rating >= 4 ?
+              <input
+                type="checkbox"
+                value="4"
+                checked={true}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />
+              :
+              <input
+                type="checkbox"
+                value="4"
+                checked={null}
+                onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+              />}{this.state.rating >= 5 ?
+                <input
+                  type="checkbox"
+                  value="5"
+                  checked={true}
+                  onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+                />
+                :
+
+                <input
+                  type="checkbox"
+                  value="5"
+                  checked={null}
+                  onClick={event => this.props.handleRatingChange(event, this.props.restaurant)}
+                />}
+
+          </form>
+        </Fragment >
+    )
+
   }
 }
+
+
+
+
+
 
 export default ReviewsForm;
