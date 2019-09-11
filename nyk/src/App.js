@@ -9,7 +9,8 @@ import Login from "./components/Login/login";
 import DashBoard from "./containers/Post_Login/DashBoard";
 import Reviews from "./components/Reviews";
 import Restaurants from "./components/Restaurants";
-import RestaurantContainer from "./containers/Post_Login/RestaurantContainer"
+import RestaurantContainer from "./containers/Post_Login/RestaurantContainer";
+import ReviewContainer from "./containers/Post_Login/ReviewContainer";
 class App extends React.Component {
   constructor() {
     super();
@@ -159,8 +160,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-              <Redirect to="/dashboard" />
-            )}
+            <Redirect to="/dashboard" />
+          )}
           <Route
             exact
             path="/login"
@@ -207,10 +208,15 @@ class App extends React.Component {
               return (
                 <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} />
               );
-
             }}
           />
-          <Route exact path="/reviews" component={Reviews} />
+          <Route
+            exact
+            path="/reviews"
+            render={() => {
+              return <ReviewContainer reviews={this.state.reviews} />;
+            }}
+          />
         </div>
       </Router>
     );

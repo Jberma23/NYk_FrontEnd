@@ -24,7 +24,8 @@ class Plans extends Component {
       <div className="ui column">
         <div className="ui card" key={this.state.plan.id}>
           <div className="content">
-            <div className="header">{this.state.plan.name}</div>
+            <div className="header">{this.props.plan.name}</div>
+            <div className="header">Restaurant: {this.props.restaurant}</div>
             <div className="meta text-wrap">
               {this.props.restaurants ? (
                 <div>
