@@ -18,13 +18,6 @@ class Plans extends Component {
     // debugger;
   }
 
-  getSelectedRestaurant = () => {
-    this.props.restaurants.filter(restaurant => {
-      debugger;
-      return restaurant.id === this.props.plan.restaurant_id;
-    });
-  };
-
   render() {
     return (
       <div className="ui column">
@@ -32,13 +25,13 @@ class Plans extends Component {
           <div className="content">
             <div className="header">{this.props.plan.name}</div>
             <div className="header">
-              Restaurant: {this.getSelectedRestaurant.name}
+              Restaurant: {this.props.restaurant.name}
             </div>
             <div className="meta text-wrap">
-              {this.props.restaurants ? (
+              {this.props.restaurant ? (
                 <div>
                   <div className="body">
-                    Location: {this.getSelectedRestaurant}
+                    Location: {this.props.restaurant.location}
                   </div>
                 </div>
               ) : null}

@@ -8,9 +8,17 @@ class PlansContainer extends Component {
   }
 
   render() {
-    return this.props.plans.map(plan => (
-      <Plan plan={plan} key={plan.id} restaurants={this.props.restaurants} />
-    ));
+    return this.props.plans.map(plan => {
+      return (
+        <Plan
+          plan={plan}
+          key={plan.id}
+          restaurant={this.props.restaurants.find(restaurant => {
+            return restaurant.id === plan.restaurant_id;
+          })}
+        />
+      );
+    });
   }
 }
 

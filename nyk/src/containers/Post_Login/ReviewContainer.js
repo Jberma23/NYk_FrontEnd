@@ -9,21 +9,20 @@ class ReviewContainer extends Component {
     };
   }
 
-  renderRestaurant() {
-    debugger
-
-  }
-
-
-
+  renderRestaurant() {}
 
   render() {
-    debugger
-    return (
-      this.props.reviews.map(review => {
-        return <Review review={review} restaurant={this.props.restaurants.find(rest => { return rest.id === review.restaurant_id })} key={review.id} />
-      })
-    )
+    return this.props.reviews.map(review => {
+      return (
+        <Review
+          review={review}
+          restaurant={this.props.restaurants.find(rest => {
+            return rest.id === review.restaurant_id;
+          })}
+          key={review.id}
+        />
+      );
+    });
   }
 }
 
