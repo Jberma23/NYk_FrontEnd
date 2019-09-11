@@ -21,7 +21,7 @@ class Plans extends Component {
   render() {
     return (
       <div className="ui column">
-        <div className="ui card" key={this.props.plan.id}>
+        <div className="card" key={this.props.plan.id}>
           <div className="content">
             <div className="header">{this.props.plan.name}</div>
             <div className="header">
