@@ -128,9 +128,7 @@ class DashBoard extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/plans" Component={Plans}>
-                  Plans
-                </NavLink>
+                <NavLink to="/plans">Plans</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/restaurants">Restaurants </NavLink>

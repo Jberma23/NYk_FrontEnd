@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import ReviewForm from "./ReviewsForm";
+
+
+
 class Restaurant extends Component {
   constructor(props) {
-    let { name, location, categories, averageReviews } = props.restaurant;
-
     super(props);
-    this.state = {};
   }
 
-  renderRestaurants = () => {};
+
+
 
   render() {
     return (
-      <div className="ui column ">
-        <div className="card">
+      <div className="ui column">
+        <div className="card" key={this.props.restaurant.id}>
           <div className="image">
             <img src={this.props.restaurant.url} />
           </div>
@@ -31,7 +32,16 @@ class Restaurant extends Component {
               {this.props.restaurant.avg_review}
             </span>
             <br></br>
-            <span>{<ReviewForm />}</span>
+            <span>
+              {
+                <ReviewForm
+                  key={this.props.restaurant.id}
+                  id={this.props.restaurant.id}
+                  restaurant={this.props.restaurant}
+                  handleRatingChange={this.props.handleRatingChange}
+                />
+              }
+            </span>
           </div>
         </div>
       </div>

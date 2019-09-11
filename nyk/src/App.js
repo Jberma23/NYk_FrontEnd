@@ -9,7 +9,7 @@ import Login from "./components/Login/login";
 import DashBoard from "./containers/Post_Login/DashBoard";
 import Reviews from "./components/Reviews";
 import Restaurants from "./components/Restaurants";
-
+import RestaurantContainer from "./containers/Post_Login/RestaurantContainer"
 class App extends React.Component {
   constructor() {
     super();
@@ -31,7 +31,8 @@ class App extends React.Component {
       loggedIn: false,
       plans: [],
       restaurants: [],
-      reviews: []
+      reviews: [],
+      rating: ""
     };
   }
   async componentDidMount() {
@@ -158,8 +159,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-            <Redirect to="/dashboard" />
-          )}
+              <Redirect to="/dashboard" />
+            )}
           <Route
             exact
             path="/login"
@@ -203,10 +204,10 @@ class App extends React.Component {
             exact
             path="/restaurants"
             render={() => {
-              let restaurants = this.state.restaurants;
-              return restaurants.map(restaurant => {
-                return <Restaurants restaurant={restaurant} />;
-              });
+              return (
+                <RestaurantContainer restaurants={this.state.restaurants} />
+              );
+
             }}
           />
           <Route exact path="/reviews" component={Reviews} />
