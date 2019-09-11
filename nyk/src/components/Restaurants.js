@@ -25,12 +25,13 @@ class Restaurant extends Component {
             <div className="description">{this.props.restaurant.location}</div>
           </div>
           <div className="extra content">
-            <span>{<ReviewForm />}</span>
             <span className="right floated">{this.props.restaurant.price}</span>
             <span>
               <i className="user icon"></i>
               {this.props.restaurant.avg_review}
             </span>
+            <br></br>
+            <span>{<ReviewForm />}</span>
           </div>
         </div>
       </div>
