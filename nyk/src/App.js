@@ -11,6 +11,7 @@ import Reviews from "./components/Reviews";
 import Restaurants from "./components/Restaurants";
 import RestaurantContainer from "./containers/Post_Login/RestaurantContainer";
 import ReviewContainer from "./containers/Post_Login/ReviewContainer";
+import PlanContainer from "./containers/Post_Login/PlansContainer";
 class App extends React.Component {
   constructor() {
     super();
@@ -206,7 +207,10 @@ class App extends React.Component {
             path="/restaurants"
             render={() => {
               return (
-                <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} />
+                <RestaurantContainer
+                  current_user={this.state.current_user}
+                  restaurants={this.state.restaurants}
+                />
               );
             }}
           />
@@ -215,6 +219,21 @@ class App extends React.Component {
             path="/reviews"
             render={() => {
               return <ReviewContainer reviews={this.state.reviews} />;
+            }}
+          />
+          <Route
+            exact
+            path="/plans"
+            render={() => {
+              return (
+                <div>
+                  <h1>Upcoming Plans</h1>
+                  <PlanContainer
+                    plans={this.state.plans}
+                    restaurants={this.state.restaurants}
+                  />
+                </div>
+              );
             }}
           />
         </div>

@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import Plans from "../../components/Plans";
+import Plan from "../../components/Plans";
 
 class PlansContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      plans: []
-    };
+    this.state = {};
   }
 
   render() {
-    return this.state.plans.map(plan => <Plans plan={plan} key={plan.id} />);
+    return this.props.plans.map(plan => (
+      <Plan plan={plan} key={plan.id} restaurants={this.props.restaurants} />
+    ));
   }
 }
 
