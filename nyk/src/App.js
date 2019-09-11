@@ -11,6 +11,7 @@ import Reviews from "./components/Reviews";
 import Restaurants from "./components/Restaurants";
 import RestaurantContainer from "./containers/Post_Login/RestaurantContainer";
 import ReviewContainer from "./containers/Post_Login/ReviewContainer";
+import PlanContainer from "./containers/Post_Login/PlansContainer";
 class App extends React.Component {
   constructor() {
     super();
@@ -144,13 +145,12 @@ class App extends React.Component {
         "Access-Control-Allow-Origin": "http://localhost:3001/users"
       },
       body: JSON.stringify({
-        "first_name": this.state.createAccountInfo.firstName,
-        "last_name": this.state.createAccountInfo.lastName,
-        "email": this.state.createAccountInfo.email,
-        "password": this.state.createAccountInfo.password,
-        "username": this.state.createAccountInfo.username
-      }
-      )
+        first_name: this.state.createAccountInfo.firstName,
+        last_name: this.state.createAccountInfo.lastName,
+        email: this.state.createAccountInfo.email,
+        password: this.state.createAccountInfo.password,
+        username: this.state.createAccountInfo.username
+      })
     })
       .then(res => res.json())
       .then(response => console.log(response))
@@ -167,8 +167,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-              <Redirect to="/dashboard" />
-            )}
+            <Redirect to="/dashboard" />
+          )}
           <Route
             exact
             path="/login"
@@ -213,9 +213,16 @@ class App extends React.Component {
             path="/restaurants"
             render={() => {
               return (
-                <RestaurantContainer current_user={this.state.current_user} restaurants={this.state.restaurants} reviews={this.state.reviews.filter(
-                  review => review.user_id === this.state.current_user.id
-                )} />
+                <div>
+                  <h1>Restaurants</h1>
+                  <RestaurantContainer
+                    current_user={this.state.current_user}
+                    restaurants={this.state.restaurants}
+                    reviews={this.state.reviews.filter(
+                      review => review.user_id === this.state.current_user.id
+                    )}
+                  />
+                </div>
               );
             }}
           />
@@ -223,7 +230,30 @@ class App extends React.Component {
             exact
             path="/reviews"
             render={() => {
-              return <ReviewContainer reviews={this.state.reviews} restaurants={this.state.restaurants} />;
+              return (
+                <div>
+                  <h1>My Reviews</h1>
+                  <ReviewContainer
+                    reviews={this.state.reviews}
+                    restaurants={this.state.restaurants}
+                  />
+                </div>
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/plans"
+            render={() => {
+              return (
+                <div>
+                  <h1>Upcoming Plans</h1>
+                  <PlanContainer
+                    plans={this.state.plans}
+                    restaurants={this.state.restaurants}
+                  />
+                </div>
+              );
             }}
           />
         </div>
