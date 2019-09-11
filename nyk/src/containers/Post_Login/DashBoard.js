@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Plans from "../../components/Plans";
 import Reviews from "../../components/Reviews";
 // import Friends from "../../components/Friends";
-
+import { NavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -10,7 +10,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -127,7 +126,9 @@ class DashBoard extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/plans">Plans</NavLink>
+                <NavLink to="/plans" Component={Plans}>
+                  Plans
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/restaurants">Restaurants</NavLink>
