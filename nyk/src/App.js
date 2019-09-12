@@ -128,11 +128,17 @@ class App extends React.Component {
     }
   };
 
-  handleCreateSubmit = (event) => {
+  handleCreateSubmit = event => {
     event.preventDefault();
-    debugger
+    debugger;
 
-    let { email, firstName, lastName, password, username } = this.state.createAccountInfo
+    let {
+      email,
+      firstName,
+      lastName,
+      password,
+      username
+    } = this.state.createAccountInfo;
 
     let user = {
       first_name: firstName,
@@ -140,7 +146,7 @@ class App extends React.Component {
       email: email,
       password: password,
       username: username
-    }
+    };
 
     fetch("http://localhost:3001/users", {
       method: "POST",
@@ -157,8 +163,10 @@ class App extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(response => this.setState({ current_user: response, loggedIn: true }))
-      .catch(e => console.error(e))
+      .then(response =>
+        this.setState({ current_user: response, loggedIn: true })
+      )
+      .catch(e => console.error(e));
   };
 
   handleCreateLoginLink = () => {
@@ -171,8 +179,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-              <Redirect to="/dashboard" />
-            )}
+            <Redirect to="/dashboard" />
+          )}
           <Route
             exact
             path="/login"
@@ -192,7 +200,6 @@ class App extends React.Component {
             render={() => {
               return (
                 <DashBoard
-
                   current_user={this.state.current_user}
                   plans={this.state.plans.filter(
                     plans => plans.user_id === this.state.current_user.id
@@ -209,8 +216,12 @@ class App extends React.Component {
             exact
             path="/register"
             render={() => {
-              return <CreateAccount handleCreateSubmit={this.handleCreateSubmit}
-                handleCreateChange={this.handleCreateChange} />;
+              return (
+                <CreateAccount
+                  handleCreateSubmit={this.handleCreateSubmit}
+                  handleCreateChange={this.handleCreateChange}
+                />
+              );
             }}
           />
           <Route
@@ -252,7 +263,6 @@ class App extends React.Component {
             render={() => {
               return (
                 <div>
-                  <h1>Upcoming Plans</h1>
                   <PlanContainer
                     plans={this.state.plans}
                     restaurants={this.state.restaurants}
