@@ -9,7 +9,11 @@ class PlansContainer extends Component {
   }
 
   sortRestaurants = () => {
-    let restaurants = [...this.props.restaurants]
+    let filtered = this.props.restaurants.filter(rest => {
+      return rest.rating !== null;
+    });
+
+    let restaurants = [filtered]
       .sort(function(a, b) {
         return b.rating - a.rating;
       })
