@@ -266,6 +266,7 @@ class App extends React.Component {
                   <PlanContainer
                     plans={this.state.plans}
                     restaurants={this.state.restaurants}
+                    reviews={this.state.reviews}
                   />
                 </div>
               );
