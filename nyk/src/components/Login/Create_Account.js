@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Nav, NavItem, NavLink } from "reactstrap";
+// import { Nav, NavItem, NavLink } from "reactstrap";
 import Login from "./login";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {}
+  componentDidMount() { }
   render() {
     return (
       <div>
@@ -63,7 +63,7 @@ class CreateAccount extends Component {
           <br></br>
           <br></br>
           <br></br>
-          <NavLink href="#" onClick={this.props.handleCreateLoginLink}>
+          <NavLink to="/login">
             Login
           </NavLink>
         </form>

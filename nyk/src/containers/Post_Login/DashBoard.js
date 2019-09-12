@@ -18,6 +18,7 @@ import {
   DropdownItem
 } from "reactstrap";
 import Restaurant from "../../components/Restaurants";
+import RestaurantContainer from "./RestaurantContainer"
 
 class DashBoard extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date <= this.state.date
     );
-    let sorted = planz.sort(function(a, b) {
+    let sorted = planz.sort(function (a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -67,7 +68,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date >= this.state.date
     );
-    let sorted = planz.sort(function(a, b) {
+    let sorted = planz.sort(function (a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -89,7 +90,7 @@ class DashBoard extends Component {
   };
 
   renderReviews = () => {
-    let reviews = [...this.props.reviews].sort(function(a, b) {
+    let reviews = [...this.props.reviews].sort(function (a, b) {
       return b.rating - a.rating;
     });
     return reviews.slice(0, 4).map(review => {
@@ -103,13 +104,13 @@ class DashBoard extends Component {
   };
 
   sortRestaurants = () => {
-    let restaurants = [...this.props.restaurants].sort(function(a, b) {
+    let restaurants = [...this.props.restaurants].sort(function (a, b) {
       return b.avg_review - a.avg_review;
-    });
-    return restaurants.slice(0, 4).map(restaurant => {
-      return <Restaurant key={restaurant.id} restaurant={restaurant} />;
-    });
+    }).slice(0, 4)
+
+    return (<RestaurantContainer current_user={this.props.current_user} restaurants={restaurants.slice(0, 4)} reviews={this.props.reviews} />)
   };
+
 
   render() {
     return (

@@ -128,33 +128,37 @@ class App extends React.Component {
     }
   };
 
-  handleCreateSubmit = event => {
+  handleCreateSubmit = (event) => {
     event.preventDefault();
+    debugger
+
+    let { email, firstName, lastName, password, username } = this.state.createAccountInfo
+
     let user = {
-      first_name: this.state.createAccountInfo.firstName,
-      last_name: this.state.createAccountInfo.lastName,
-      email: this.state.createAccountInfo.email,
-      password: this.state.createAccountInfo.password,
-      username: this.state.createAccountInfo.username
-    };
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      password: password,
+      username: username
+    }
+
     fetch("http://localhost:3001/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001/users"
+        Accept: "application/json"
       },
       body: JSON.stringify({
-        first_name: this.state.createAccountInfo.firstName,
-        last_name: this.state.createAccountInfo.lastName,
-        email: this.state.createAccountInfo.email,
-        password: this.state.createAccountInfo.password,
-        username: this.state.createAccountInfo.username
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        username: username
       })
     })
       .then(res => res.json())
-      .then(response => console.log(response))
-      .catch(e => console.error(e));
+      .then(response => this.setState({ current_user: response, loggedIn: true }))
+      .catch(e => console.error(e))
   };
 
   handleCreateLoginLink = () => {
@@ -167,8 +171,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-            <Redirect to="/dashboard" />
-          )}
+              <Redirect to="/dashboard" />
+            )}
           <Route
             exact
             path="/login"
@@ -188,8 +192,8 @@ class App extends React.Component {
             render={() => {
               return (
                 <DashBoard
-                  let
-                  c_user={this.state.current_user}
+
+                  current_user={this.state.current_user}
                   plans={this.state.plans.filter(
                     plans => plans.user_id === this.state.current_user.id
                   )}
@@ -205,7 +209,8 @@ class App extends React.Component {
             exact
             path="/register"
             render={() => {
-              return <CreateAccount />;
+              return <CreateAccount handleCreateSubmit={this.handleCreateSubmit}
+                handleCreateChange={this.handleCreateChange} />;
             }}
           />
           <Route
