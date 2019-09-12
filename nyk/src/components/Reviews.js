@@ -17,13 +17,13 @@ class Reviews extends Component {
         <div className="ui card" key={this.props.review.id}>
           <div className="content">
             {this.state.restaurant ? (
-              <div className="header">{this.state.restaurant.name}</div>
+              <div className="header">{this.props.restaurant.name}</div>
             ) : null}
             <div className="meta text-wrap">
-              {this.state.restaurant ? (
+              {this.props.restaurant ? (
                 <div className="body">
                   <p>Rating: {this.props.review.rating}</p>
-                  <p>Location: {this.state.restaurant.location}</p>
+                  <p>Location: {this.props.restaurant.location}</p>
                 </div>
               ) : (
                 <div className="body">
