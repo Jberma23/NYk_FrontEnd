@@ -11,6 +11,7 @@ class Reviews extends Component {
   // console.log(rest);
   componentDidMount() {}
   render() {
+    let date = new Date(this.state.review.created_at.slice(0, 10));
     return (
       <div className="ui column">
         <div className="ui card" key={this.props.review.id}>
@@ -29,7 +30,7 @@ class Reviews extends Component {
                   <p>Rating: {this.props.review.rating}</p>
                 </div>
               )}
-              <small>Date: {this.state.review.created_at}</small>
+              <small>Date: {date.toLocaleDateString("en-US")}</small>
             </div>
           </div>
         </div>
