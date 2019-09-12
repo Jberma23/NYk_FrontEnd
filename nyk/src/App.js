@@ -250,7 +250,9 @@ class App extends React.Component {
                 <div>
                   <h1>My Reviews</h1>
                   <ReviewContainer
-                    reviews={this.state.reviews}
+                    reviews={this.state.reviews.filter(
+                      review => review.user_id === this.state.current_user.id
+                    )}
                     restaurants={this.state.restaurants}
                   />
                 </div>
