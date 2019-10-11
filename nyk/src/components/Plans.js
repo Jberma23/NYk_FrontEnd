@@ -4,7 +4,7 @@ class Plans extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    debugger;
+
   }
 
   componentDidMount() {
@@ -25,13 +25,13 @@ class Plans extends Component {
           <div className="content">
             <div className="header">{this.props.plan.name}</div>
             <div className="header">
-              Restaurant: {this.props.restaurant.name}
+              Restaurant: {this.props.restaurants.name}
             </div>
             <div className="meta text-wrap">
               {this.props.restaurant ? (
                 <div>
                   <div className="body">
-                    Location: {this.props.restaurant.location}
+                    Location: {this.props.restaurants.location}
                   </div>
                 </div>
               ) : null}

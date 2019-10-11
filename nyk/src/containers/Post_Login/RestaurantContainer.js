@@ -10,7 +10,7 @@ class RestaurantContainer extends Component {
     };
   }
   handleRatingChange = (event, restaurant) => {
-    debugger;
+
     restaurant.rating = event.target.value;
     let col = [...this.state.restaurants];
     let i = col.indexOf(restaurant);

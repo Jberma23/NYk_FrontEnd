@@ -5,8 +5,12 @@ import ReviewForm from "./ReviewsForm";
 
 class Restaurant extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+
+    }
   }
+
 
 
 
@@ -16,7 +20,7 @@ class Restaurant extends Component {
       <div className="ui column">
         <div className="card" key={this.props.restaurant.id}>
           <div className="image">
-            <img src={this.props.restaurant.url} />
+            <img src={this.props.restaurant.url} alt="food" />
           </div>
           <div className="content">
             <div className="header">{this.props.restaurant.name}</div>

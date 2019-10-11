@@ -10,6 +10,12 @@
   pointer-events: none;
 }
 
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+  padding-left: 26px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

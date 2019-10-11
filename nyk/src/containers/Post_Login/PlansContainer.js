@@ -13,11 +13,9 @@ class PlansContainer extends Component {
       return rest.rating !== null;
     });
 
-    let restaurants = [filtered]
-      .sort(function(a, b) {
-        return b.rating - a.rating;
-      })
-      .slice(0, 4);
+    let restaurants = filtered.sort(function (a, b) {
+      return b.avg_review - a.avg_review;
+    }).slice(0, 4);
     return <PlansForm restaurants={restaurants} />;
   };
 
