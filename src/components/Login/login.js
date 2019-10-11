@@ -42,7 +42,7 @@ const LoginForm = (props) => (
       </Grid.Column>
     </Grid>
 
-    <Logout handleUserLogOut={this.props.handleUserLogOut} />
+    {/* <Logout handleUserLogOut={this.props.handleUserLogOut} /> */}
   </React.Fragment>
 )
 

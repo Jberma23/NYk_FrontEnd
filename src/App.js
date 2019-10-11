@@ -44,7 +44,7 @@ class App extends React.Component {
         password: ""
       },
       loading: true,
-      current_user: null,
+      currentUser: null,
       accountCreate: false,
       plans: [],
       restaurants: [],
@@ -52,10 +52,13 @@ class App extends React.Component {
       rating: ""
     };
   }
-  async componentDidMount() {
+  componentDidMount() {
     fetch("http://localhost:3001/users")
       .then(resp => resp.json())
-      .then(users => this.setState({ users: users }))
+      .then(users => {
+        users.map(e =>
+          this.setState({ users: [...this.state.users, e], plans: [...this.state.plans, e.plans], reviews: [...this.state.reviews, e.reviews] }))
+      })
       .catch(e => console.error(e));
 
     // fetch("http://localhost:3001/plans")
@@ -94,7 +97,8 @@ class App extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        res.map(e =>
+        debugger
+        return res.map(e =>
           this.setState({ users: [...this.state.users, e], plans: [...this.state.plans, e.plans], reviews: [...this.state.reviews, e.reviews] }))
       })
       .catch(e => console.error(e))
@@ -186,24 +190,24 @@ class App extends React.Component {
               );
             }}
           />
-          {/* <Route
+          <Route
             exact
             path="/dashboard"
             render={() => {
               return (
-                // <DashBoard
-                //   current_user={this.state.current_user}
-                //   plans={this.state.plans.filter(
-                //     plans => plans.user_id === this.state.current_user.id
-                //   )}
-                //   reviews={this.state.reviews.filter(
-                //     review => review.user_id === this.state.current_user.id
-                //   )}
-                //   restaurants={this.state.restaurants}
-                // />
+                <DashBoard
+                  current_user={this.state.current_user}
+                  plans={this.state.plans.filter(
+                    plans => plans.user_id === this.state.current_user.id
+                  )}
+                  reviews={this.state.reviews.filter(
+                    review => review.user_id === this.state.current_user.id
+                  )}
+                  restaurants={this.state.restaurants}
+                />
               );
             }}
-          /> */}
+          />
           <Route
             exact
             path="/register"
