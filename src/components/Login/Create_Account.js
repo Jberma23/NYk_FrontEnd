@@ -11,50 +11,50 @@ class CreateAccount extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={event => this.props.handleCreateSubmit(event)}>
+        <form onSubmit={event => this.props.handleCreateAccountSubmit(event)}>
           <label>First Name:</label>
           <br></br>
           <input
             type="text"
-            id="First_name"
+            id="first_name"
             placeholder="First Name"
-            onChange={event => this.props.handleCreateChange(event)}
+            onChange={event => this.props.handleCreateAccountChange(event)}
           ></input>
           <br></br>
           <label>Last Name:</label>
           <br></br>
           <input
             type="text"
-            id="Last_name"
+            id="last_name"
             placeholder="Last Name"
-            onChange={event => this.props.handleCreateChange(event)}
+            onChange={event => this.props.handleCreateAccountChange(event)}
           ></input>
           <br></br>
           <label>Email:</label>
           <br></br>
           <input
             type="text"
-            id="Email"
+            id="email"
             placeholder="Email"
-            onChange={event => this.props.handleCreateChange(event)}
+            onChange={event => this.props.handleCreateAccountChange(event)}
           ></input>
           <br></br>
           <label>Username:</label>
           <br></br>
           <input
             type="text"
-            id="Username"
+            id="username"
             placeholder="Username"
-            onChange={event => this.props.handleCreateChange(event)}
+            onChange={event => this.props.handleCreateAccountChange(event)}
           ></input>
           <br></br>
           <label>Password:</label>
           <br></br>
           <input
             type="password"
-            id="Password"
+            id="password"
             placeholder="Password"
-            onChange={event => this.props.handleCreateChange(event)}
+            onChange={event => this.props.handleCreateAccountChange(event)}
           ></input>
           <br></br>
           <button type="submit" id="Submit" value="Submit">

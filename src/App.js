@@ -17,20 +17,20 @@ class App extends React.Component {
     super();
     this.state = {
       users: [],
-      loginInfo: {
-        username: "",
-        password: ""
-      },
-      createAccountInfo: {
+      newUser: {
         firstName: "",
         lastName: "",
-        email: "",
         username: "",
+        email: "",
+        password: "",
+      },
+      existingUser: {
+        email: "",
         password: ""
       },
+      loading: true,
       current_user: null,
       accountCreate: false,
-      loggedIn: false,
       plans: [],
       restaurants: [],
       reviews: [],
@@ -58,116 +58,92 @@ class App extends React.Component {
       .then(reviews => this.setState({ reviews: reviews }));
   }
 
-  handleLoginSubmit = event => {
-    event.preventDefault();
+  handleUserLogOut = (event) => {
+    event.preventDefault()
+    const r = window.confirm("Do you really want to Sign Out?")
+    if (r == true) {
+      localStorage.clear()
+      this.setState({ currentUser: null })
 
-    let user = this.state.users.find(
-      user =>
-        user.username === this.state.loginInfo.username &&
-        user.password === this.state.loginInfo.password
-    );
-    if (user) {
-      this.setState({ current_user: user, loggedIn: true });
-    } else {
-      alert(
-        "There is no login matching that username or password. Please try again or create an account."
-      );
     }
-  };
-
-  handleLoginChange = event => {
-    if (event.target.id === "username") {
-      this.setState({
-        loginInfo: { ...this.state.loginInfo, username: event.target.value }
-      });
-    } else {
-      this.setState({
-        loginInfo: { ...this.state.loginInfo, password: event.target.value }
-      });
-    }
-  };
-
-  handleCreateChange = event => {
-    const exp = `${event.target.id}`;
-
-    if (exp === "First_name") {
-      this.setState({
-        createAccountInfo: {
-          ...this.state.createAccountInfo,
-          firstName: event.target.value
-        }
-      });
-    } else if (exp === "Last_name") {
-      this.setState({
-        createAccountInfo: {
-          ...this.state.createAccountInfo,
-          lastName: event.target.value
-        }
-      });
-    } else if (exp === "Email") {
-      this.setState({
-        createAccountInfo: {
-          ...this.state.createAccountInfo,
-          email: event.target.value
-        }
-      });
-    } else if (exp === "Username") {
-      this.setState({
-        createAccountInfo: {
-          ...this.state.createAccountInfo,
-          username: event.target.value
-        }
-      });
-    } else if (exp === "Password") {
-      this.setState({
-        createAccountInfo: {
-          ...this.state.createAccountInfo,
-          password: event.target.value
-        }
-      });
-    }
-  };
-
-  handleCreateSubmit = event => {
-    event.preventDefault();
+  }
 
 
-    let {
-      email,
-      firstName,
-      lastName,
-      password,
-      username
-    } = this.state.createAccountInfo;
-
-    let user = {
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      password: password,
-      username: username
-    };
+  handleCreateAccountSubmit = (event) => {
+    event.preventDefault()
 
     fetch("http://localhost:3001/users", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password: password,
-        username: username
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user: this.state.newUser })
     })
       .then(res => res.json())
-      .then(response =>
-        this.setState({ current_user: response, loggedIn: true })
-      )
-      .catch(e => console.error(e));
-  };
+      .then(res => this.setState({ currentUser: res }))
+      .catch(e => console.error(e))
+
+  }
+
+
+  handleCreateAccountChange = (event) => {
+    this.setState({
+      newUser: {
+        ...this.state.newUser,
+        [event.target.id]: event.target.value
+      }
+    })
+
+  }
+  handleCreateAccountOwnerChange = (event) => {
+    this.setState(
+      {
+        newUser: {
+          ...this.state.newUser
+        }
+      })
+  }
+
+  handleLoginChange = (event) => {
+    this.setState({
+      existingUser: {
+        ...this.state.existingUser,
+        [event.target.id]: event.target.value
+      }
+    })
+  }
+  handleLoginSubmit = (event) => {
+    event.preventDefault()
+
+    fetch('http://localhost:3001/users/sign_in', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          email: this.state.existingUser.email,
+          password: this.state.existingUser.password,
+        }
+      })
+    })
+      .then(response => {
+
+        if (response.ok) {
+          return response.json()
+
+        } else {
+          console.error("incorrect login info")
+        }
+      })
+      .then(data => {
+        if (data.authenticated) {
+          localStorage.setItem("token", data.token)
+          this.setState({ currentUser: data.user, favoriteTrucks: data.user.favorites })
+        } else {
+          alert("Incorrect Email or Password")
+        }
+      }).catch((e) => console.error(e))
+  }
 
   handleCreateLoginLink = () => {
     this.setState({ accountCreate: !this.state.accountCreate });
@@ -176,20 +152,18 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          {this.state.current_user === null ? (
-            <Redirect to="/login" />
+          {/* {this.state.current_user === null ? ( */}
+          {/* <Redirect to="/login" />
           ) : (
-              <Redirect to="/dashboard" />
-            )}
+              <Redirect to="/dashboard" /> */}
+          )}
           <Route
             exact
             path="/login"
             render={() => {
               return (
                 <Login
-                  handleCreateLoginLink={this.handleCreateLoginLink}
-                  handleLoginSubmit={this.handleLoginSubmit}
-                  handleLoginChange={this.handleLoginChange}
+                  handleLoginChange={this.handleLoginChange} handleLoginSubmit={this.handleLoginSubmit}
                 />
               );
             }}
@@ -218,8 +192,7 @@ class App extends React.Component {
             render={() => {
               return (
                 <CreateAccount
-                  handleCreateSubmit={this.handleCreateSubmit}
-                  handleCreateChange={this.handleCreateChange}
+                  handleCreateAccountSubmit={this.handleCreateAccountSubmit} handleCreateAccountChange={this.handleCreateAccountChange}
                 />
               );
             }}
