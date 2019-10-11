@@ -1,5 +1,3 @@
-
-
 .App {
   text-align: center;
 }
@@ -45,17 +43,4 @@ a.isDisabled {
   to {
     transform: rotate(360deg);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

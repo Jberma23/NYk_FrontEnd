@@ -51,7 +51,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date <= this.state.date
     );
-    let sorted = planz.sort(function (a, b) {
+    let sorted = planz.sort(function(a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -68,7 +68,7 @@ class DashBoard extends Component {
     let planz = [...this.props.plans].filter(
       plans => plans.date >= this.state.date
     );
-    let sorted = planz.sort(function (a, b) {
+    let sorted = planz.sort(function(a, b) {
       let dateA = new Date(a.date);
       let dateB = new Date(b.date);
       return dateA - dateB;
@@ -90,7 +90,7 @@ class DashBoard extends Component {
   };
 
   renderReviews = () => {
-    let reviews = [...this.props.reviews].sort(function (a, b) {
+    let reviews = [...this.props.reviews].sort(function(a, b) {
       return b.rating - a.rating;
     });
     return reviews.slice(0, 4).map(review => {
@@ -105,7 +105,7 @@ class DashBoard extends Component {
 
   sortRestaurants = () => {
     let restaurants = [...this.props.restaurants]
-      .sort(function (a, b) {
+      .sort(function(a, b) {
         return b.avg_review - a.avg_review;
       })
       .slice(0, 4);
@@ -122,7 +122,7 @@ class DashBoard extends Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        {/* <Navbar color="light" light expand="md">
           <NavbarBrand href="/">NYK: Now You Know</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -146,9 +146,9 @@ class DashBoard extends Component {
               </NavItem>
             </Nav>
           </Collapse>
-        </Navbar>
+        </Navbar> */}
 
-        <div className="ui four column grid" style={{ "paddingTop": "16px" }}>
+        <div className="ui four column grid" style={{ paddingTop: "16px" }}>
           <h1 className="ui center aligned header">Upcoming Plans</h1>
           <div className="row">{this.sortFuturePlans()}</div>
           <h1>Past Plans</h1>

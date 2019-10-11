@@ -2,7 +2,12 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./containers/Pre-Login/home";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 import Dash from "./containers/Post_Login/Dash";
 import CreateAccount from "./components/Login/Create_Account";
 import Login from "./components/Login/login";
@@ -12,6 +17,15 @@ import Restaurants from "./components/Restaurants";
 import RestaurantContainer from "./containers/Post_Login/RestaurantContainer";
 import ReviewContainer from "./containers/Post_Login/ReviewContainer";
 import PlanContainer from "./containers/Post_Login/PlansContainer";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem
+} from "reactstrap";
+import { NavLink } from "react-router-dom";
 class App extends React.Component {
   constructor() {
     super();
@@ -131,7 +145,6 @@ class App extends React.Component {
   handleCreateSubmit = event => {
     event.preventDefault();
 
-
     let {
       email,
       firstName,
@@ -179,8 +192,36 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
+            <>
               <Redirect to="/dashboard" />
-            )}
+              <Navbar color="light" light expand="md">
+                <NavbarBrand href="/dashboard">NYK: Now You Know</NavbarBrand>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                  <Nav className="ml-auto" navbar>
+                    <NavItem>
+                      <NavLink
+                        to="/reviews"
+                        render={<Reviews reviews={this.state.reviews} />}
+                      >
+                        Reviews
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink to="/plans">Plans</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink to="/restaurants">Restaurants </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink to="/friends">Friends </NavLink>
+                    </NavItem>
+                  </Nav>
+                </Collapse>
+              </Navbar>
+            </>
+          )}
+
           <Route
             exact
             path="/login"
@@ -282,4 +323,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
