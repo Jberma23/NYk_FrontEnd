@@ -130,7 +130,7 @@ class App extends React.Component {
 
   handleCreateSubmit = event => {
     event.preventDefault();
-
+    debugger;
 
     let {
       email,
@@ -179,8 +179,8 @@ class App extends React.Component {
           {this.state.current_user === null ? (
             <Redirect to="/login" />
           ) : (
-              <Redirect to="/dashboard" />
-            )}
+            <Redirect to="/dashboard" />
+          )}
           <Route
             exact
             path="/login"
