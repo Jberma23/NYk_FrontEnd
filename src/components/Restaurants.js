@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import ReviewForm from "./ReviewsForm";
 
-
-
 class Restaurant extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-
-    }
+    super(props);
+    this.state = {};
   }
-
-
-
-
 
   render() {
     return (

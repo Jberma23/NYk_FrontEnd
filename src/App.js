@@ -2,7 +2,12 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./containers/Pre-Login/home";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 import Dash from "./containers/Post_Login/Dash";
 import CreateAccount from "./components/Login/Create_Account";
 import Login from "./components/Login/login";
@@ -12,6 +17,15 @@ import Restaurants from "./components/Restaurants";
 import RestaurantContainer from "./containers/Post_Login/RestaurantContainer";
 import ReviewContainer from "./containers/Post_Login/ReviewContainer";
 import PlanContainer from "./containers/Post_Login/PlansContainer";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem
+} from "reactstrap";
+import { NavLink } from "react-router-dom";
 class App extends React.Component {
   constructor() {
     super();
@@ -156,7 +170,7 @@ class App extends React.Component {
           {/* <Redirect to="/login" />
           ) : (
               <Redirect to="/dashboard" /> */}
-          )}
+          {/* )} */}
           <Route
             exact
             path="/login"
@@ -252,7 +266,8 @@ class App extends React.Component {
         </div>
       </Router>
     );
-  }
-}
 
-export default App;
+
+
+
+    export default withRouter(App);
