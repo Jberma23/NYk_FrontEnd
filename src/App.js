@@ -97,7 +97,6 @@ class App extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        debugger
         return res.map(e =>
           this.setState({ users: [...this.state.users, e], plans: [...this.state.plans, e.plans], reviews: [...this.state.reviews, e.reviews] }))
       })
@@ -197,12 +196,8 @@ class App extends React.Component {
               return (
                 <DashBoard
                   current_user={this.state.current_user}
-                  plans={this.state.plans.filter(
-                    plans => plans.user_id === this.state.current_user.id
-                  )}
-                  reviews={this.state.reviews.filter(
-                    review => review.user_id === this.state.current_user.id
-                  )}
+                  plans={this.state.plans}
+                  reviews={this.state.reviews}
                   restaurants={this.state.restaurants}
                 />
               );
@@ -257,9 +252,7 @@ class App extends React.Component {
                 <div>
                   <h1>My Reviews</h1>
                   <ReviewContainer
-                    reviews={this.state.reviews.filter(
-                      review => review.user_id === this.state.current_user.id
-                    )}
+                    reviews={this.state.reviews}
                     restaurants={this.state.restaurants}
                   />
                 </div>

@@ -45,6 +45,7 @@ class DashBoard extends Component {
       .then(restaurants => this.setState({ restaurants: restaurants }));
   }
   render() {
+    debugger
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -70,7 +71,7 @@ class DashBoard extends Component {
         <div className="ui four column grid">
           <h1>Upcoming Plans</h1>
           <div className="row">
-            {this.state.plans.map(plan => (
+            {this.props.plans.map(plan => (
               <Plans
                 plan={plan}
                 key={plan.id}

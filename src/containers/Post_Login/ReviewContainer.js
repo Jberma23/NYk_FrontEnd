@@ -9,7 +9,7 @@ class ReviewContainer extends Component {
     };
   }
 
-  renderRestaurant() {}
+  renderRestaurant() { }
 
   render() {
     return this.props.reviews.map(review => {
