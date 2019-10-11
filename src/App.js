@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./containers/Pre-Login/home";
+import Logout from "./containers/Pre-Login/Logout"
 import {
   BrowserRouter as Router,
   Route,
@@ -57,23 +58,23 @@ class App extends React.Component {
       .then(users => this.setState({ users: users }))
       .catch(e => console.error(e));
 
-    await fetch("http://localhost:3001/plans")
-      .then(res => res.json())
-      .then(plans =>
-        this.setState({
-          plans: plans
-        })
-      );
-    await fetch("http://localhost:3001/restaurants")
+    // fetch("http://localhost:3001/plans")
+    //   .then(res => res.json())
+    //   .then(plans =>
+    //     this.setState({
+    //       plans: plans
+    //     })
+    //   );
+    fetch("http://localhost:3001/restaurants")
       .then(res => res.json())
       .then(restaurants => this.setState({ restaurants: restaurants }));
-    await fetch("http://localhost:3001/reviews")
-      .then(res => res.json())
-      .then(reviews => this.setState({ reviews: reviews }));
+    // fetch("http://localhost:3001/reviews")
+    //   .then(res => res.json())
+    //   .then(reviews => this.setState({ reviews: reviews }));
   }
 
   handleUserLogOut = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     const r = window.confirm("Do you really want to Sign Out?")
     if (r == true) {
       localStorage.clear()
@@ -92,7 +93,10 @@ class App extends React.Component {
       body: JSON.stringify({ user: this.state.newUser })
     })
       .then(res => res.json())
-      .then(res => this.setState({ currentUser: res }))
+      .then(res => {
+        res.map(e =>
+          this.setState({ users: [...this.state.users, e], plans: [...this.state.plans, e.plans], reviews: [...this.state.reviews, e.reviews] }))
+      })
       .catch(e => console.error(e))
 
   }
@@ -151,8 +155,9 @@ class App extends React.Component {
       })
       .then(data => {
         if (data.authenticated) {
+          debugger
           localStorage.setItem("token", data.token)
-          this.setState({ currentUser: data.user, favoriteTrucks: data.user.favorites })
+          this.setState({ currentUser: data.user })
         } else {
           alert("Incorrect Email or Password")
         }
@@ -166,40 +171,39 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          {/* {this.state.current_user === null ? ( */}
-          {/* <Redirect to="/login" />
-          ) : (
-              <Redirect to="/dashboard" /> */}
-          {/* )} */}
+          {this.state.currentUser === null ?
+            <Redirect to="/login" />
+            :
+            <Redirect to="/dashboard" />}
           <Route
             exact
             path="/login"
             render={() => {
               return (
                 <Login
-                  handleLoginChange={this.handleLoginChange} handleLoginSubmit={this.handleLoginSubmit}
+                  handleLoginChange={this.handleLoginChange} handleLoginSubmit={this.handleLoginSubmit} handleUserLogOut={this.handleUserLogOut}
                 />
               );
             }}
           />
-          <Route
+          {/* <Route
             exact
             path="/dashboard"
             render={() => {
               return (
-                <DashBoard
-                  current_user={this.state.current_user}
-                  plans={this.state.plans.filter(
-                    plans => plans.user_id === this.state.current_user.id
-                  )}
-                  reviews={this.state.reviews.filter(
-                    review => review.user_id === this.state.current_user.id
-                  )}
-                  restaurants={this.state.restaurants}
-                />
+                // <DashBoard
+                //   current_user={this.state.current_user}
+                //   plans={this.state.plans.filter(
+                //     plans => plans.user_id === this.state.current_user.id
+                //   )}
+                //   reviews={this.state.reviews.filter(
+                //     review => review.user_id === this.state.current_user.id
+                //   )}
+                //   restaurants={this.state.restaurants}
+                // />
               );
             }}
-          />
+          /> */}
           <Route
             exact
             path="/register"
@@ -207,6 +211,18 @@ class App extends React.Component {
               return (
                 <CreateAccount
                   handleCreateAccountSubmit={this.handleCreateAccountSubmit} handleCreateAccountChange={this.handleCreateAccountChange}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/logout"
+            render={() => {
+              return (
+                <Logout
+                  handleUserLogOut={this.handleUserLogOut}
+
                 />
               );
             }}
@@ -266,8 +282,9 @@ class App extends React.Component {
         </div>
       </Router>
     );
+  }
+}
 
 
 
-
-    export default withRouter(App);
+export default App;

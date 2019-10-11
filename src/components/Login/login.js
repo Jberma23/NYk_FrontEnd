@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 import React from 'react'
 import { Link } from "react-router-dom"
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-
+import Logout from '../../containers/Pre-Login/Logout'
 const LoginForm = (props) => (
   <React.Fragment>
     {/* <Headr /> */}
@@ -42,7 +42,7 @@ const LoginForm = (props) => (
       </Grid.Column>
     </Grid>
 
-
+    <Logout handleUserLogOut={this.props.handleUserLogOut} />
   </React.Fragment>
 )
 
